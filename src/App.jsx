@@ -110,9 +110,8 @@ function App() {
                 <div
                   key={index}
                   className={`
-                    min-h-[80px] p-2 border-r border-b border-gray-200
+                    min-h-[80px] p-2 border-r border-b border-gray-200 relative
                     ${isCurrentMonth ? "bg-white" : "bg-gray-50"}
-                    ${isToday ? "bg-blue-100" : ""}
                     ${isSelected ? "bg-blue-500 text-white" : ""}
                     hover:bg-blue-50 transition-colors cursor-pointer
                   `}
@@ -121,12 +120,15 @@ function App() {
                     className={`
                     text-sm font-medium
                     ${isCurrentMonth ? "text-gray-900" : "text-gray-400"}
-                    ${isToday ? "text-blue-600 font-bold" : ""}
                     ${isSelected ? "text-white" : ""}
+                    ${isToday && !isSelected ? "text-blue-600 font-bold" : ""}
                   `}
                   >
                     {day.format("D")}
                   </div>
+                  {isToday && (
+                    <div className="absolute top-1 right-1 w-2 h-2 bg-blue-500 rounded-full"></div>
+                  )}
                 </div>
               );
             })}
