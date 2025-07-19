@@ -7,6 +7,7 @@ export function Instructions() {
         <li>• Drag events between dates to reschedule them</li>
         <li>• Click the × button to delete an event</li>
         <li>• Events are automatically colored for easy identification</li>
+        <li>• Only one event per day is allowed</li>
       </ul>
     </div>
   );
