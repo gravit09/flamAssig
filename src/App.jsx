@@ -30,6 +30,13 @@ function App() {
     setSearchResults(results);
   };
 
+  const handleDeleteEvent = (eventId) => {
+    deleteEvent(eventId);
+    setSearchResults((prevResults) =>
+      prevResults.filter((event) => event.id !== eventId)
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <div className="max-w-4xl mx-auto">
@@ -39,7 +46,7 @@ function App() {
 
         <SearchResults
           searchResults={searchResults}
-          onDeleteEvent={deleteEvent}
+          onDeleteEvent={handleDeleteEvent}
         />
 
         <CalendarGrid
