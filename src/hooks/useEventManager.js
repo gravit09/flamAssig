@@ -1,8 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import moment from "moment";
 
+const STORAGE_KEY = "calendar_events";
+
+const loadEventsFromStorage = () => {
+  try {
+    const savedEvents = localStorage.getItem(STORAGE_KEY);
+    if (savedEvents) {
+      return JSON.parse(savedEvents);
+    }
+  } catch (error) {
+    console.error("Error loading events from localStorage:", error);
+  }
+  return [];
+};
+
 export function useEventManager() {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState(loadEventsFromStorage);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
+  }, [events]);
 
   const addEvent = (date) => {
     const dateString = date.format("YYYY-MM-DD");

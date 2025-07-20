@@ -4,7 +4,6 @@ import { MonthNavigation } from "./MonthNavigation";
 
 export function CalendarGrid({
   currentDate,
-  events,
   getEventsForDate,
   onAddEvent,
   onDeleteEvent,
