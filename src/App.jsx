@@ -11,8 +11,14 @@ function App() {
   const [currentDate, setCurrentDate] = useState(moment());
   const [searchResults, setSearchResults] = useState([]);
 
-  const { events, addEvent, deleteEvent, moveEvent, getEventsForDate } =
-    useEventManager();
+  const {
+    events,
+    addEvent,
+    deleteEvent,
+    editEvent,
+    moveEvent,
+    getEventsForDate,
+  } = useEventManager();
 
   const goToPreviousMonth = () => {
     setCurrentDate(currentDate.clone().subtract(1, "month"));
@@ -37,6 +43,18 @@ function App() {
     );
   };
 
+  const handleEditEvent = (eventId, currentName) => {
+    const newName = prompt("Edit event name:", currentName);
+    if (newName !== null && newName.trim()) {
+      editEvent(eventId, newName);
+      setSearchResults((prevResults) =>
+        prevResults.map((event) =>
+          event.id === eventId ? { ...event, name: newName.trim() } : event
+        )
+      );
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <div className="max-w-4xl mx-auto">
@@ -47,6 +65,7 @@ function App() {
         <SearchResults
           searchResults={searchResults}
           onDeleteEvent={handleDeleteEvent}
+          onEditEvent={handleEditEvent}
         />
 
         <CalendarGrid
@@ -55,6 +74,7 @@ function App() {
           getEventsForDate={getEventsForDate}
           onAddEvent={addEvent}
           onDeleteEvent={deleteEvent}
+          onEditEvent={handleEditEvent}
           onMoveEvent={moveEvent}
           onPreviousMonth={goToPreviousMonth}
           onNextMonth={goToNextMonth}

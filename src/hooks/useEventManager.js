@@ -35,6 +35,17 @@ export function useEventManager() {
     setEvents(events.filter((event) => event.id !== eventId));
   };
 
+  const editEvent = (eventId, newName) => {
+    if (!newName || !newName.trim()) {
+      return;
+    }
+
+    const updatedEvents = events.map((event) =>
+      event.id === eventId ? { ...event, name: newName.trim() } : event
+    );
+    setEvents(updatedEvents);
+  };
+
   const moveEvent = (eventId, newDate) => {
     const existingEvent = events.find((event) => event.date === newDate);
     if (existingEvent) {
@@ -62,6 +73,7 @@ export function useEventManager() {
     events,
     addEvent,
     deleteEvent,
+    editEvent,
     moveEvent,
     getEventsForDate,
   };

@@ -1,8 +1,14 @@
-export function DraggableEvent({ event, isSelected, onDelete }) {
+export function DraggableEvent({ event, isSelected, onDelete, onEdit }) {
   const handleDeleteClick = (e) => {
     e.stopPropagation();
     e.preventDefault();
     onDelete(event.id);
+  };
+
+  const handleEditClick = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    onEdit(event.id, event.name);
   };
 
   const handleDragStart = (e) => {
@@ -27,9 +33,18 @@ export function DraggableEvent({ event, isSelected, onDelete }) {
         <span className="truncate">{event.name}</span>
       </div>
       <button
+        onClick={handleEditClick}
+        className="ml-1 text-xs opacity-70 hover:opacity-100 bg-blue-500 text-white rounded-full w-4 h-4 flex items-center justify-center flex-shrink-0"
+        style={{ fontSize: "10px" }}
+        title="Edit"
+      >
+        ✎
+      </button>
+      <button
         onClick={handleDeleteClick}
         className="ml-1 text-xs opacity-70 hover:opacity-100 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center flex-shrink-0"
         style={{ fontSize: "10px" }}
+        title="Delete"
       >
         ×
       </button>

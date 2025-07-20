@@ -8,6 +8,7 @@ export function CalendarGrid({
   getEventsForDate,
   onAddEvent,
   onDeleteEvent,
+  onEditEvent,
   onMoveEvent,
   onPreviousMonth,
   onNextMonth,
@@ -61,6 +62,7 @@ export function CalendarGrid({
               isSelected={isSelected}
               onAddEvent={onAddEvent}
               onDeleteEvent={onDeleteEvent}
+              onEditEvent={onEditEvent}
               onMoveEvent={onMoveEvent}
             />
           );

@@ -8,6 +8,7 @@ export function CalendarDay({
   isSelected,
   onAddEvent,
   onDeleteEvent,
+  onEditEvent,
   onMoveEvent,
 }) {
   const handleDragOver = (e) => {
@@ -54,6 +55,7 @@ export function CalendarDay({
             event={event}
             isSelected={isSelected}
             onDelete={onDeleteEvent}
+            onEdit={onEditEvent}
           />
         ))}
       </div>
