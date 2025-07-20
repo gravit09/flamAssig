@@ -3,10 +3,13 @@ import moment from "moment";
 import { useEventManager } from "./hooks/useEventManager";
 import { CalendarHeader } from "./components/CalendarHeader";
 import { CalendarGrid } from "./components/CalendarGrid";
+import { SearchBar } from "./components/SearchBar";
+import { SearchResults } from "./components/SearchResults";
 import { Instructions } from "./components/Instructions";
 
 function App() {
   const [currentDate, setCurrentDate] = useState(moment());
+  const [searchResults, setSearchResults] = useState([]);
 
   const { events, addEvent, deleteEvent, moveEvent, getEventsForDate } =
     useEventManager();
@@ -23,10 +26,21 @@ function App() {
     setCurrentDate(moment());
   };
 
+  const handleSearchResults = (results) => {
+    setSearchResults(results);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <div className="max-w-4xl mx-auto">
         <CalendarHeader onGoToToday={goToToday} />
+
+        <SearchBar events={events} onSearchResults={handleSearchResults} />
+
+        <SearchResults
+          searchResults={searchResults}
+          onDeleteEvent={deleteEvent}
+        />
 
         <CalendarGrid
           currentDate={currentDate}
