@@ -36,7 +36,7 @@ export function CalendarDay({
       <div
         className={`text-sm font-medium ${
           isCurrentMonth ? "text-gray-900" : "text-gray-400"
-        } ${isSelected ? "text-white" : ""} ${
+        } ${isSelected ? "text-gray-900" : ""} ${
           isToday && !isSelected ? "text-blue-600 font-bold" : ""
         }`}
       >
