@@ -7,6 +7,7 @@ export function CalendarDay({
   isToday,
   isSelected,
   onAddEvent,
+  onAddRecurringEvent,
   onDeleteEvent,
   onEditEvent,
   onMoveEvent,
@@ -23,10 +24,16 @@ export function CalendarDay({
     onMoveEvent(eventId, targetDate);
   };
 
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+    onAddRecurringEvent(day);
+  };
+
   return (
     <div
       onDragOver={handleDragOver}
       onDrop={handleDrop}
+      onContextMenu={handleContextMenu}
       className={`min-h-[80px] p-2 border-r border-b border-gray-200 relative ${
         isCurrentMonth ? "bg-white" : "bg-gray-50"
       } ${

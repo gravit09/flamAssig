@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function SearchBar({ events, onSearchResults }) {
+export function SearchBar({ events, recurringEvents, onSearchResults }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (value) => {
@@ -11,11 +11,16 @@ export function SearchBar({ events, onSearchResults }) {
       return;
     }
 
-    const filteredEvents = events.filter((event) =>
+    const filteredRegularEvents = events.filter((event) =>
       event.name.toLowerCase().includes(value.toLowerCase())
     );
 
-    onSearchResults(filteredEvents);
+    const filteredRecurringEvents = recurringEvents.filter((event) =>
+      event.name.toLowerCase().includes(value.toLowerCase())
+    );
+
+    const allResults = [...filteredRegularEvents, ...filteredRecurringEvents];
+    onSearchResults(allResults);
   };
 
   const clearSearch = () => {

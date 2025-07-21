@@ -6,6 +6,7 @@ import { CalendarGrid } from "./components/CalendarGrid";
 import { SearchBar } from "./components/SearchBar";
 import { SearchResults } from "./components/SearchResults";
 import { Instructions } from "./components/Instructions";
+import { RecurringEventModal } from "./components/RecurringEventModal";
 
 function App() {
   const [currentDate, setCurrentDate] = useState(moment());
@@ -13,11 +14,17 @@ function App() {
 
   const {
     events,
+    recurringEvents,
+    recurringModalOpen,
+    targetDate,
     addEvent,
+    addRecurringEvent,
+    createRecurringEvent,
     deleteEvent,
     editEvent,
     moveEvent,
-    getEventsForDate,
+    getAllEventsForDate,
+    closeRecurringModal,
   } = useEventManager();
 
   const goToPreviousMonth = () => {
@@ -60,7 +67,11 @@ function App() {
       <div className="max-w-4xl mx-auto">
         <CalendarHeader onGoToToday={goToToday} />
 
-        <SearchBar events={events} onSearchResults={handleSearchResults} />
+        <SearchBar
+          events={events}
+          recurringEvents={recurringEvents}
+          onSearchResults={handleSearchResults}
+        />
 
         <SearchResults
           searchResults={searchResults}
@@ -71,16 +82,24 @@ function App() {
         <CalendarGrid
           currentDate={currentDate}
           events={events}
-          getEventsForDate={getEventsForDate}
+          getEventsForDate={getAllEventsForDate}
           onAddEvent={addEvent}
+          onAddRecurringEvent={addRecurringEvent}
           onDeleteEvent={deleteEvent}
-          onEditEvent={handleEditEvent}
+          onEditEvent={editEvent}
           onMoveEvent={moveEvent}
           onPreviousMonth={goToPreviousMonth}
           onNextMonth={goToNextMonth}
         />
 
         <Instructions />
+
+        <RecurringEventModal
+          isOpen={recurringModalOpen}
+          onClose={closeRecurringModal}
+          onSubmit={createRecurringEvent}
+          targetDate={targetDate}
+        />
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ export function CalendarGrid({
   currentDate,
   getEventsForDate,
   onAddEvent,
+  onAddRecurringEvent,
   onDeleteEvent,
   onEditEvent,
   onMoveEvent,
@@ -60,6 +61,7 @@ export function CalendarGrid({
               isToday={isToday}
               isSelected={isSelected}
               onAddEvent={onAddEvent}
+              onAddRecurringEvent={onAddRecurringEvent}
               onDeleteEvent={onDeleteEvent}
               onEditEvent={onEditEvent}
               onMoveEvent={onMoveEvent}
