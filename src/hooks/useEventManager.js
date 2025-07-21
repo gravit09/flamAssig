@@ -141,8 +141,8 @@ export function useEventManager() {
   };
 
   const deleteEvent = (eventId) => {
-    if (eventId.includes("_")) {
-      const [recurringEventId] = eventId.split("_");
+    if (String(eventId).includes("_")) {
+      const [recurringEventId] = String(eventId).split("_");
       setRecurringEvents(
         recurringEvents.filter(
           (event) => event.id !== parseInt(recurringEventId)
@@ -158,8 +158,8 @@ export function useEventManager() {
       return;
     }
 
-    if (eventId.includes("_")) {
-      const [recurringEventId] = eventId.split("_");
+    if (String(eventId).includes("_")) {
+      const [recurringEventId] = String(eventId).split("_");
       const updatedRecurringEvents = recurringEvents.map((event) =>
         event.id === parseInt(recurringEventId)
           ? { ...event, name: newName.trim() }
@@ -188,9 +188,9 @@ export function useEventManager() {
     }
 
     // Check if it's a recurring event instance
-    if (eventId.includes("_")) {
+    if (String(eventId).includes("_")) {
       // For recurring events, we'll update the start date of the recurring event
-      const [recurringEventId, originalDate] = eventId.split("_");
+      const [recurringEventId, originalDate] = String(eventId).split("_");
       const recurringEvent = recurringEvents.find(
         (event) => event.id === parseInt(recurringEventId)
       );
