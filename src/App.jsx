@@ -86,7 +86,7 @@ function App() {
           onAddEvent={addEvent}
           onAddRecurringEvent={addRecurringEvent}
           onDeleteEvent={deleteEvent}
-          onEditEvent={editEvent}
+          onEditEvent={handleEditEvent}
           onMoveEvent={moveEvent}
           onPreviousMonth={goToPreviousMonth}
           onNextMonth={goToNextMonth}

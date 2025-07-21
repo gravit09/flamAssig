@@ -8,6 +8,7 @@ export function DraggableEvent({ event, isSelected, onDelete, onEdit }) {
   const handleEditClick = (e) => {
     e.stopPropagation();
     e.preventDefault();
+    console.log("clicked");
     onEdit(event.id, event.name);
   };
 

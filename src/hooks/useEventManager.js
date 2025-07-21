@@ -168,7 +168,9 @@ export function useEventManager() {
       setRecurringEvents(updatedRecurringEvents);
     } else {
       const updatedEvents = events.map((event) =>
-        event.id === eventId ? { ...event, name: newName.trim() } : event
+        Number(event.id) === Number(eventId)
+          ? { ...event, name: newName.trim() }
+          : event
       );
       setEvents(updatedEvents);
     }
